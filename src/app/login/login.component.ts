@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
   url: string | null = null;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     // 방법 1
@@ -21,6 +21,14 @@ export class LoginComponent implements OnInit {
       console.log(data.get('url'));
       this.url = data.get('url');
     });
+  }
+
+  click(): void {
+    console.log('login');
+
+    setTimeout(() => {
+      this.router.navigate([this.url || '']);
+    }, 1000);
   }
 
 }
